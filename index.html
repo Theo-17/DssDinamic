@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Reflect XSS Demo</title>
+</head>
+<body>
+  <h1>Dynamic XSS Reflect Demo</h1>
+  <form action="/" method="GET">
+    <label>Ingresa tu nombre: <input name="msg"></label>
+    <button>Saludar</button>
+  </form>
+  <div id="output"></div>
+  <script>
+    // Sin sanitizar: reflejamos msg directamente en innerHTML
+    const p = new URLSearchParams(location.search).get('msg');
+    if (p) {
+      document.getElementById('output').innerHTML =
+        `<p>Hola, ${p}</p>`;
+    }
+  </script>
+</body>
+</html>
